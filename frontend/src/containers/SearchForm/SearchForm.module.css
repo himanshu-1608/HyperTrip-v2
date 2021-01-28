@@ -1,0 +1,65 @@
+.RootContainer {
+	width: 100%;
+	background-color: #eee;
+	margin: auto;
+	padding: 2rem 0;
+}
+
+.FormContainer {
+	width: 70%;
+	margin: auto;
+	padding: 2rem 4rem;
+	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.InputContainer {
+	padding: 1rem;
+	background-color: #ffffff;
+	width: 100%;
+	margin: 1rem auto;
+	border-radius: 25px;
+	text-align: start;
+}
+
+.InputContainer > svg {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.InputContainer > input {
+	border: 0px;
+	vertical-align: middle;
+	margin-left: 12px;
+	outline: none;
+}
+
+.FormContainer > button {
+	padding: 1rem;
+	width: 50%;
+	margin: 1rem auto;
+	border-radius: 25px;
+	background-color: #ef5350;
+	color: #ffffff;
+	outline: none;
+}
+
+.FormContainer > button:hover {
+	color: #ef5350;
+	background-color: #ffffff;
+	border: 2px solid #ef5350;
+	font-size: 16px;
+}
+
+.SearchResultsContainer {
+	/* background-color: red; */
+	margin-top: 50px;
+}
+.SearchResultsContainer > header {
+	font-size: 20px;
+	/* text-align: left; */
+}
+
+.SearchResultsContainer > header > hr {
+	width: 50%;
+}

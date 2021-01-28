@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+
+.RootContainer {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	box-sizing: border-box;
+	padding-left: 24px;
+	padding-top: 32px;
+	top: 0;
+	left: 0;
+	border-top-left-radius: 10px;
+}
+
+.IconContainer {
+	font-size: 30px;
+}
+
+.IconContainer > img {
+	height: 70px;
+	width: 70px;
+	border-radius: 50%;
+	vertical-align: middle;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.IconContainer > span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 8px;
+	font-family: 'Dancing Script', cursive;
+	font-size: 40px;
+}
+
+ul {
+	display: flex;
+	flex-direction: column;
+	margin: 100px 0 0 0;
+	padding-left: 0;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: 'Lato', sans-serif;
+}
+
+ul > li {
+	display: block;
+	/* margin: 10px; */
+	font-size: 20px;
+	width: 80%;
+	box-sizing: border-box;
+	padding: 12px;
+	border: none;
+	outline: none;
+}
+
+li > a {
+	text-decoration: none;
+	color: #000;
+	cursor: pointer;
+	vertical-align: middle;
+	display: inline-block;
+	width: 70%;
+	margin-left: 16px;
+	border: none;
+	outline: none;
+}
+
+li:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+li > a:hover,
+li > a:active {
+	color: #ffffff;
+}
+
+.LogoutDiv {
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 30px;
+	text-decoration: none;
+	color: #000;
+	cursor: pointer;
+	width: 70%;
+	margin-left: 16px;
+}
+
+.LogoutDiv:hover {
+	color: #ffffff;
+}
+
+svg {
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.ActiveLink {
+	color: #ffffff;
+}
