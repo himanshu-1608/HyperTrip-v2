@@ -1,11 +1,11 @@
-
 const assert = require('assert');
 const mongoose = require('mongoose');
 
 const { MONGODB_TEST_URI } = require('../config');
 const adminControllers = require('../controllers/admin');
 
-mongoose.connect(MONGODB_TEST_URI, {
+mongoose
+  .connect(MONGODB_TEST_URI, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -46,22 +46,23 @@ describe('Unit Tests: Test for controllers/bus.js:', () => {
         journeyDate: '2021-01-27',
         fare: '250',
         departureTime: '10:00',
-        arrivalTime: '13:00'
+        arrivalTime: '13:00',
       },
-      userId: '600a5f3ea8cfa13b54cc9668'
+      userId: '600a5f3ea8cfa13b54cc9668',
     };
-    adminControllers.postAddBus(req, res, next)
-      .then(function() {
-          assert.ok(res.statusCode === 201);
-          assert.ok(res.body.success === true);
-          done();
+    adminControllers
+      .postAddBus(req, res, next)
+      .then(function () {
+        assert.ok(res.statusCode === 201);
+        assert.ok(res.body.success === true);
+        done();
       })
-      .catch(err => {
+      .catch((err) => {
         done(new Error('Error in creating a bus'));
       });
   });
 
-  it('should fail to add a bus(Bus number should be provided)', function (done){
+  it('should fail to add a bus(Bus number should be provided)', function (done) {
     let req = {
       body: {
         name: 'Haryana Roadways',
@@ -70,12 +71,13 @@ describe('Unit Tests: Test for controllers/bus.js:', () => {
         journeyDate: '2021-01-27',
         fare: '250',
         departureTime: '10:00',
-        arrivalTime: '13:00'
+        arrivalTime: '13:00',
       },
-      userId: '600a5f3ea8cfa13b54cc9668'
+      userId: '600a5f3ea8cfa13b54cc9668',
     };
-    adminControllers.postAddBus(req, res, next)
-      .then(function() {
+    adminControllers
+      .postAddBus(req, res, next)
+      .then(function () {
         assert.ok(res.statusCode === 201);
         assert.ok(res.body && res.body.success === true);
         done(new Error('New Bus is created without required field!'));

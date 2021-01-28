@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
-import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers/index';
 import { BrowserRouter } from 'react-router-dom';
+import rootReducer from './reducers/index';
+import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 import App from './App';
@@ -13,11 +13,11 @@ import App from './App';
 const store = createStore(rootReducer);
 
 ReactDOM.render(
-    <Provider  store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 

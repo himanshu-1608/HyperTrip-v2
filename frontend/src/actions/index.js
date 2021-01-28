@@ -1,2 +1,1 @@
-
-export { setStatusToLogin, setStatusToLogout} from './auth';
+export { setStatusToLogin, setStatusToLogout } from './auth';

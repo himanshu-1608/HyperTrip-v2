@@ -1,81 +1,81 @@
 .RootContainer {
-	background-color: #ffffff;
-	width: 55%;
-	padding: 2rem;
-	justify-content: left;
-	margin: 20px auto;
-	box-shadow: 15px 15px 15px -15px rgba(0, 0, 0, 0.5);
-	border-left: 10px solid grey;
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
+  background-color: #ffffff;
+  width: 55%;
+  padding: 2rem;
+  justify-content: left;
+  margin: 20px auto;
+  box-shadow: 15px 15px 15px -15px rgba(0, 0, 0, 0.5);
+  border-left: 10px solid grey;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .UpperContainer {
-	display: flex;
-	width: 100%;
-	justify-content: space-between;
-	margin-bottom: 15px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .UpperContainer > div > h2 {
-	font-size: 20px;
-	margin-bottom: 0px;
+  font-size: 20px;
+  margin-bottom: 0px;
 }
 
 .UpperContainer > div > p {
-	font-size: 16px;
-	color: grey;
+  font-size: 16px;
+  color: grey;
 }
 
 .LowerContainer {
-	display: flex;
-	justify-content: space-between;
-	text-align: left;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
 }
 
 .LowerContainer > div:nth-of-type(1) > div {
-	margin: 20px 0px 15px 0px;
-	font-size: 20px;
+  margin: 20px 0px 15px 0px;
+  font-size: 20px;
 }
 
 .LowerContainer > div > div > span {
-	display: inline-block;
-	height: 15px;
-	width: 15px;
-	background-color: green;
-	border-radius: 50%;
-	margin-right: 10px;
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .LowerContainer > div > div > p {
-	/* display: inline-block; */
-	font-size: 12px;
-	color: grey;
-	font-style: italic;
-	margin-left: 25px;
+  /* display: inline-block; */
+  font-size: 12px;
+  color: grey;
+  font-style: italic;
+  margin-left: 25px;
 }
 
 .LowerContainer > div > button {
-	margin: 15px 0px;
-	padding: 1rem;
-	background-color: #ef5350;
-	outline: none;
-	border: none;
-	color: #ffffff;
-	border-radius: 5px;
+  margin: 15px 0px;
+  padding: 1rem;
+  background-color: #ef5350;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 .LowerContainer > div > button:hover {
-	background-color: #ffffff;
-	color: #ef5350;
-	border: 2px solid #ef5350;
+  background-color: #ffffff;
+  color: #ef5350;
+  border: 2px solid #ef5350;
 }
 
 .PriceDiv {
-	font-size: 30px;
-	font-weight: normal;
-	margin: 30px 0px 10px 0px;
-	/* padding-right: 15px; */
+  font-size: 30px;
+  font-weight: normal;
+  margin: 30px 0px 10px 0px;
+  /* padding-right: 15px; */
 }
 
 /*************/
