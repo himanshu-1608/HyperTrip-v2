@@ -1,20 +1,19 @@
 import React from 'react';
 
-import classes from './Bus.module.css';
+import classes from './Movie.module.css';
 
-const bus = (props) => (
+const movie = (props) => (
   <div className={classes.RootContainer} onClick={props.clicked}>
     <div className={classes.UpperContainer}>
       <div>
-        <h2>Departure Time </h2>
-        <p>{props.bus.departureTime}</p>
+        <h3>Cinema</h3>
+        <p>{props.movie.cinemaName}</p>
       </div>
       <div>
-        <h2>Arrival time</h2>
-        <p>{props.bus.arrivalTime}</p>
+        <h1>{props.movie.name}</h1>
       </div>
       <div>
-        <h2>Seat</h2>
+        <h2>Seats</h2>
         <p>40</p>
       </div>
     </div>
@@ -22,23 +21,16 @@ const bus = (props) => (
       <div>
         <div>
           <span />
-          {props.bus.startCity} 
-{' '}
-<p>start</p>
+          {props.movie.movieStartTime} <p>start</p>
         </div>
         <div>
           <span />
-          {props.bus.endCity} 
-{' '}
-<p> end</p>
+          {props.movie.movieEndTime} <p> end</p>
         </div>
       </div>
 
       <div>
-        <div className={classes.PriceDiv}>
-          ₹
-{props.bus.fare}
-        </div>
+        <div className={classes.PriceDiv}>₹{props.movie.ticketCharge}</div>
         <button onClick={props.showBackdropHandler}>
           {props.isAdmin ? 'Details' : 'Book now'}
         </button>
@@ -47,4 +39,4 @@ const bus = (props) => (
   </div>
 );
 
-export default bus;
+export default movie;

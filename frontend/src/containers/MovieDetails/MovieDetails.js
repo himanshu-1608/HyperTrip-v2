@@ -3,12 +3,12 @@ import { FaBity } from 'react-icons/fa';
 import { connect } from 'react-redux';
 
 import fetcher from '../../fetchWrapper';
-import classes from './BusDetails.module.css';
+import classes from './MovieDetails.module.css';
 
-class BusDetails extends Component {
+class MovieDetails extends Component {
   state = {
-    busId: this.props.match.params.busId,
-    bus: this.props.location.data.bus,
+    movieId: this.props.match.params.movieId,
+    movie: this.props.location.data.movie,
     bookedSeats: [],
     bookedSeatNumbers: [],
     selectedSeats: [],
@@ -16,24 +16,24 @@ class BusDetails extends Component {
     isBooked: false,
     hideUserDetails: true,
     clickedSeat: '',
-    showMsg: false
+    showMsg: false,
   };
 
   componentDidMount() {
-    this.getBusDetails();
+    this.getMovieDetails();
   }
 
-  getBusDetails = async () => {
-    const busId = this.state.busId;
-    const result = await fetcher(`/bus/booked-seats/${busId}`, 'GET');
-    console.log(result); // remove later
+  getMovieDetails = async () => {
+    const movieId = this.state.movieId;
+    const result = await fetcher(`/movie/booked-seats/${movieId}`, 'GET');
+    console.log('getMovieDetails: ', result); // remove later
     if (!result.success) {
       return this.props.history.push('/error');
     }
     const bookedSeatNumbers = result.bookedSeats.map((seat) => seat.number);
     this.setState({
       bookedSeatNumbers: bookedSeatNumbers,
-      bookedSeats: result.bookedSeats
+      bookedSeats: result.bookedSeats,
     });
   };
 
@@ -56,7 +56,7 @@ class BusDetails extends Component {
         const updatedSelectedSeats = [...this.state.selectedSeats];
         updatedSelectedSeats.push(event.target.id);
         this.setState({ selectedSeats: updatedSelectedSeats }, () =>
-          console.log(this.state)
+          console.log('updated state on seatclickhandler', this.state)
         );
       } else if (event.target.className.includes('Blue')) {
         event.target.className = classes.Indigo;
@@ -64,7 +64,7 @@ class BusDetails extends Component {
         const index = updatedSelectedSeats.indexOf(event.target.id);
         updatedSelectedSeats.splice(index, 1);
         this.setState({ selectedSeats: updatedSelectedSeats }, () =>
-          console.log(this.state)
+          console.log('updated state on seatclickhandler', this.state)
         );
       }
     }
@@ -73,36 +73,34 @@ class BusDetails extends Component {
   buyTicketHandler = async () => {
     if (this.state.selectedSeats.length === 0) return;
     const body = {
-      busId: this.state.busId,
-      selectedSeats: [...this.state.selectedSeats]
+      movieId: this.state.movieId,
+      selectedSeats: [...this.state.selectedSeats],
     };
     const result = await fetcher(
       '/ticket/book-ticket',
       'POST',
       JSON.stringify(body)
     );
-    console.log(result); // remove later
+    console.log('buytickethandler result: ', result); // remove later
     if (!result.success) {
       return this.props.history.push('/error');
     }
-    // this.props.history.push('/dashboard');
     this.setState({ showMsg: true });
   };
 
-  resetBus = async () => {
+  resetMovie = async () => {
     const result = await fetcher(
       '/admin/reset',
       'POST',
       JSON.stringify({
-        busId: this.state.busId,
-        isAdmin: this.props.userInfo.isAdmin
+        movieId: this.state.movieId,
+        isAdmin: this.props.userInfo.isAdmin,
       })
     );
-    console.log(result); // remove later
+    console.log('resetMovie result: ', result); // remove later
     if (!result.success) {
       return this.props.history.push('/error');
     }
-    //  this.props.history.push('/dashboard');
   };
 
   render() {
@@ -156,15 +154,18 @@ class BusDetails extends Component {
               </div>
             ) : null}
           </div>
-          <div className={classes.DriverSymbol}>
-            <div>
-              <FaBity size={45} /> <br />
-              <span>Driver</span>
-            </div>
+          <div
+            style={{
+              backgroundColor: 'black',
+              textAlign: 'center',
+              color: 'white',
+            }}
+            className={classes.DriverSymbol}>
+            Movie Screen
           </div>
           <div className={classes.SeatsContainer}>{seatsContainer}</div>
           {this.props.userInfo && this.props.userInfo.isAdmin ? (
-            <button onClick={this.resetBus}>Reset</button>
+            <button onClick={this.resetMovie}>Reset</button>
           ) : null}
         </div>
         {this.props.userInfo &&
@@ -192,7 +193,11 @@ class BusDetails extends Component {
           <div className={classes.TicketBookerInfoContainer}>
             <h2>Details</h2>
             <div>
-              <p>₹ {300 * this.state.selectedSeats.length}</p>
+              <p>
+                ₹
+                {this.state.movie.ticketCharge *
+                  this.state.selectedSeats.length}
+              </p>
               <p> {this.props.userInfo.name}</p>
               <p>Seats: {this.state.selectedSeats.length} </p>
             </div>
@@ -211,8 +216,8 @@ class BusDetails extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.auth.userDetails
+    userInfo: state.auth.userDetails,
   };
 };
 
-export default connect(mapStateToProps)(BusDetails);
+export default connect(mapStateToProps)(MovieDetails);

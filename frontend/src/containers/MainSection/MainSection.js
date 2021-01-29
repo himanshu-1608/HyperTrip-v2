@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BsSearch, BsCardList } from 'react-icons/bs';
 import { BiPlus } from 'react-icons/bi';
 
-import Bus from '../../components/Bus/Bus';
+import Movie from '../../components/Movie/Movie';
 import SearchForm from '../SearchForm/SearchForm';
 import AddBusForm from '../AddBusForm/AddBusForm';
 import classes from './MainSection.module.css';
@@ -111,31 +111,29 @@ class MainSection extends Component {
     this.props.history.push('/dashboard/add');
   };
 
-  redirectToBusDetails = (bus) => {
+  redirectToMovieDetails = (movie) => {
     this.props.history.push({
-      pathname: '/bus-details/' + bus._id,
-      data: bus,
+      pathname: '/movie-details/' + movie._id,
+      data: movie,
     });
   };
 
   render() {
     const searchSection = this.state.onSearchSection ? <SearchForm /> : null;
 
-    let buses;
-    if (this.state.allMovies) {
-      buses = this.state.allMovies.map((bus) => {
-        return (
-          <Bus
-            key={bus._id}
-            bus={bus}
-            clicked={() => this.redirectToBusDetails(bus)}
-            isAdmin={this.props.userInfo.isAdmin}
-          />
-        );
-      });
-    }
+    let movies;
+    movies = this.state.allMovies.map((movie) => {
+      return (
+        <Movie
+          key={movie._id}
+          movie={movie}
+          clicked={() => this.redirectToMovieDetails(movie)}
+          isAdmin={this.props.userInfo.isAdmin}
+        />
+      );
+    });
 
-    const viewAllSection = this.state.onViewAllSection ? buses : null;
+    const viewAllSection = this.state.onViewAllSection ? movies : null;
 
     const addBusSection = this.state.onAddBusSection ? (
       <AddBusForm

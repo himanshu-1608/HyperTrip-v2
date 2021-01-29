@@ -7,7 +7,7 @@ import Signup from './containers/Signup/Signup';
 import Login from './containers/Login/Login';
 import Error from './components/Error/Error';
 import MainSection from './containers/MainSection/MainSection';
-import BusDetails from './containers/BusDetails/BusDetails';
+import MovieDetails from './containers/MovieDetails/MovieDetails';
 
 import * as actionCreators from './actions/index';
 import classes from './App.module.css';
@@ -48,8 +48,8 @@ class App extends Component {
               ) : null}
               {isAuth ? (
                 <Route
-                  path="/bus-details/:busId"
-                  component={BusDetails}
+                  path="/movie-details/:movieId"
+                  component={MovieDetails}
                   isAdmin={this.props.userInfo.isAdmin}
                 />
               ) : null}

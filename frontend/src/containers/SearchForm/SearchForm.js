@@ -5,7 +5,7 @@ import { BsCursor } from 'react-icons/bs';
 import { GoLocation } from 'react-icons/go';
 import { MdDateRange } from 'react-icons/md';
 
-import Bus from '../../components/Bus/Bus';
+import Movie from '../../components/Movie/Movie';
 import fetcher from '../../fetchWrapper';
 import classes from './SearchForm.module.css';
 
@@ -16,12 +16,12 @@ class SearchForm extends Component {
     journeyDate: '',
     searchResults: [],
     errorMessage: '',
-    isSearched: false
+    isSearched: false,
   };
 
   inputChangeHandler = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -42,7 +42,7 @@ class SearchForm extends Component {
     const body = JSON.stringify({
       startCity: startCity,
       endCity: endCity,
-      journeyDate: journeyDate
+      journeyDate: journeyDate,
     });
     const result = await fetcher('/bus/search-bus', 'POST', body);
     console.log(result); // remove later
@@ -52,10 +52,10 @@ class SearchForm extends Component {
     this.setState({ searchResults: result.buses, isSearched: true });
   };
 
-  redirectToBusDetails = (bus) => {
+  redirectToMovieDetails = (movie) => {
     this.props.history.push({
-      pathname: '/bus-details/' + bus._id,
-      data: bus
+      pathname: '/movie-details/' + movie._id,
+      data: movie,
     });
   };
 
@@ -64,10 +64,10 @@ class SearchForm extends Component {
     if (this.state.isSearched) {
       const searchedBuses = this.state.searchResults.map((bus) => {
         return (
-          <Bus
+          <Movie
             key={bus._id}
             bus={bus}
-            clicked={() => this.redirectToBusDetails(bus)}
+            clicked={() => this.redirectToMovieDetails(bus)}
             isAdmin={this.props.userInfo.isAdmin}
           />
         );
@@ -128,7 +128,7 @@ class SearchForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.auth.userDetails
+    userInfo: state.auth.userDetails,
   };
 };
 
