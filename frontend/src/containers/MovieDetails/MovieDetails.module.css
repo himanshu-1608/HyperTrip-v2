@@ -54,13 +54,12 @@
 
 .Grey {
   background-color: #eee;
+  border: 2px solid #eee;
 }
 
 .Grey:hover {
   background-color: #ffffff;
-  border: 2px solid #eee;
-  color: #eee;
-  font-weight: bold;
+  color: black;
 }
 
 .Blue {

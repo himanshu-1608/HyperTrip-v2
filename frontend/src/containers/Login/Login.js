@@ -11,10 +11,10 @@ class Login extends Component {
   state = {
     userInfo: {
       email: '',
-      password: ''
+      password: '',
     },
     isLoading: false,
-    error: ''
+    error: '',
   };
 
   componentDidMount() {
@@ -72,6 +72,7 @@ class Login extends Component {
   };
 
   render() {
+    console.log('Login bhi chala');
     let error = null;
     if (this.state.error !== '') {
       error = <p style={{ color: 'red' }}>{this.state.error}</p>;
@@ -151,14 +152,14 @@ class Login extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
-    userDetails: state.auth.userDetails
+    userDetails: state.auth.userDetails,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setStatusToLogin: (userDetails, token) =>
-      dispatch(actionCreators.setStatusToLogin(userDetails, token))
+      dispatch(actionCreators.setStatusToLogin(userDetails, token)),
   };
 };
 

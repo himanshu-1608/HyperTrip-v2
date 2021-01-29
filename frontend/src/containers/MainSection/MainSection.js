@@ -114,7 +114,7 @@ class MainSection extends Component {
   redirectToMovieDetails = (movie) => {
     this.props.history.push({
       pathname: '/movie-details/' + movie._id,
-      data: movie,
+      data: { movie: movie },
     });
   };
 

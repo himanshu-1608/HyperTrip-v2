@@ -9,7 +9,7 @@ import classes from './Navbar.module.css';
 
 class Navigation extends Component {
   state = {
-    prevPath: ''
+    prevPath: '',
   };
 
   getElements = () => {
@@ -116,7 +116,7 @@ class Navigation extends Component {
                 style={{
                   marginRight: '10px',
                   position: 'absolute',
-                  left: '30px'
+                  left: '30px',
                 }}
               />
               <div

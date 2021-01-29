@@ -90,7 +90,7 @@ class MovieDetails extends Component {
 
   resetMovie = async () => {
     const result = await fetcher(
-      '/admin/reset',
+      '/admin/reset?isAdmin=true',
       'POST',
       JSON.stringify({
         movieId: this.state.movieId,

@@ -24,11 +24,12 @@ class App extends Component {
 
   logoutHandler = () => {
     this.props.setStatusToLogout();
-    return this.props.history.push('/login');
+    this.props.history.push('/login');
   };
 
   render() {
     const isAuth = this.props.isAuth;
+    console.log('isAuth changes: ', isAuth);
     return (
       <BrowserRouter>
         <div className={classes.RootContainer}>
@@ -42,7 +43,7 @@ class App extends Component {
               {!isAuth ? (
                 <Route exact path="/signup" component={Signup} />
               ) : null}
-              {!isAuth ? <Route exact path="/login" component={Login} /> : null}
+              <Route exact path="/login" component={Login} />
               {isAuth ? (
                 <Route path="/dashboard" component={MainSection} />
               ) : null}
