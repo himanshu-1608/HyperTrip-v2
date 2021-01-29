@@ -56,7 +56,7 @@ exports.findMovieBySpecificFields = async (
         movieDate: movieDate,
       }).limit(20);
     } else if (movieEndTime.trim() !== '' && movieDate.trim() !== '') {
-      buses = await Movie.find({
+      movies = await Movie.find({
         movieEndTime: movieEndTime,
         movieDate: movieDate,
       }).limit(20);

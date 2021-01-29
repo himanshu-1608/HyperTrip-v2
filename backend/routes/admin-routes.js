@@ -6,9 +6,9 @@ const adminControllers = require('../controllers/admin-controllers');
 
 const router = express.Router();
 
-router.post('/add-bus', isAuth, isAdmin, adminControllers.postAddBus);
+router.post('/add-movie', isAuth, isAdmin, adminControllers.postAddMovie);
 
-router.get('/admin-buses', isAuth, isAdmin, adminControllers.getBuses);
+router.get('/admin-movies', isAuth, isAdmin, adminControllers.getMovies);
 
 router.post('/reset', isAuth, isAdmin, adminControllers.postReset);
 

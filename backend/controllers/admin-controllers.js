@@ -1,69 +1,66 @@
 const movieUtils = require('../utils/db-utils/movie-utils');
 const ticketUtils = require('../utils/db-utils/ticket-utils');
 
-exports.postAddBus = async (req, res, next) => {
-  let createdBy, busDetails, createdBus;
+exports.postAddMovie = async (req, res, next) => {
+  let createdBy, movieDetails, createdMovie;
   try {
     const {
       name,
-      number,
-      startCity,
-      endCity,
-      fare,
-      departureTime,
-      arrivalTime,
-      journeyDate,
+      cinemaName,
+      movieDate,
+      ticketCharge,
+      movieStartTime,
+      movieEndTime,
     } = req.body;
     createdBy = req.userId;
-    busDetails = {
+    movieDetails = {
       name,
-      number,
-      startCity,
-      endCity,
-      fare,
-      departureTime,
-      arrivalTime,
-      journeyDate,
+      cinemaName,
+      movieDate,
+      ticketCharge,
+      movieStartTime,
+      movieEndTime,
+      bookedSeats: [],
       createdBy,
     };
 
-    createdBus = await busUtils.createBus(busDetails);
+    createdMovie = await movieUtils.createMovie(movieDetails);
     res.status(201).json({
-      message: 'Bus added successfully',
+      message: 'Movie added successfully',
       success: true,
-      createdBus: createdBus,
+      createdMovie: createdMovie,
     });
   } catch (error) {
     error.statusCode = 500;
-    error.message = error.message || 'Error in creating Bus';
+    error.message = error.message || 'Error in creating Movie';
     return next(error);
   }
 };
 
-exports.getBuses = async (req, res, next) => {
+exports.getMovies = async (req, res, next) => {
   try {
     const adminId = req.userId;
-    const buses = await movieUtils.findMoviesCreatedByAdmin(adminId);
+    const movies = await movieUtils.findMoviesCreatedByAdmin(adminId);
     res.status(200).json({
-      message: 'Buses fetched successfullly.',
+      message: 'Movies fetched successfullly.',
       success: true,
-      buses: buses,
+      movies: movies,
     });
   } catch (error) {
     error.statusCode = 500;
-    error.message = error.message || 'Fetching buses failed';
+    error.message = error.message || 'Fetching movies failed';
     return next(error);
   }
 };
 
 exports.postReset = async (req, res, next) => {
   try {
-    const busId = req.body.busId;
-    const busToReset = await busUtils.findBusById(busId);
-    if (!busToReset) throw new Error('Bus(to reset) not found!');
-    await ticketUtils.deleteManyTickets(busToReset.bookedSeats);
+    const movieId = req.body.movieId;
+    const movieToReset = await movieUtils.findMovieById(movieId);
+    if (!movieToReset) throw new Error('Movie(to reset) not found!');
+    await ticketUtils.deleteManyTickets(movieToReset.bookedSeats);
     res.status(200).json({
-      message: 'Bus tickets reset successfully',
+      message: 'Movie tickets reset successfully',
       success: true,
     });
   } catch (error) {

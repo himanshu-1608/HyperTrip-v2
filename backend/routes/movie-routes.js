@@ -1,14 +1,14 @@
 const express = require('express');
 
 const isAuth = require('../middlewares/isAuth');
-const busControllers = require('../controllers/bus-controllers');
+const movieControllers = require('../controllers/movie-controllers');
 
 const router = express.Router();
 
-router.get('/buses', isAuth, busControllers.getAllBuses);
+router.get('/movies', isAuth, movieControllers.getAllMovies);
 
-router.post('/search-bus', isAuth, busControllers.getSearchedBuses);
+router.post('/search-movie', isAuth, movieControllers.getSearchedMovies);
 
-router.get('/booked-seats/:busId', isAuth, busControllers.getBookedSeats);
+router.get('/booked-seats/:movieId', isAuth, movieControllers.getBookedSeats);
 
 module.exports = router;

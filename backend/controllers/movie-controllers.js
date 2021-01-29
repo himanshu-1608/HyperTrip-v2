@@ -1,55 +1,52 @@
-const userUtils = require('../utils/db-utils/user-utils');
 const movieUtils = require('../utils/db-utils/movie-utils');
 
-exports.getAllBuses = async (req, res, next) => {
+exports.getAllMovies = async (req, res, next) => {
   try {
-    const buses = await busUtils.findAllBuses();
-    if (!buses) throw new Error('Some db error');
+    const movies = await movieUtils.findAllMovies();
+    if (!movies) throw new Error('No Movies Found!');
     res.status(200).json({
-      message: 'Buses fetched successfully',
+      message: 'Movies fetched successfully',
       success: true,
-      buses: buses,
+      movies: movies,
     });
   } catch (error) {
     error.statusCode = 500;
-    error.message = error.message || 'Fetching all buses failed';
+    error.message = error.message || 'Fetching all movies failed';
     return next(error);
   }
 };
 
-exports.getSearchedBuses = async (req, res, next) => {
+exports.getSearchedMovies = async (req, res, next) => {
   try {
-    const { startCity, endCity, journeyDate } = req.body;
-    const buses = await busUtils.findBusBySpecificFields(
-      startCity,
-      endCity,
-      journeyDate
+    const { movieStartTime, movieEndTime, movieDate } = req.body;
+    const movies = await movieUtils.findMovieBySpecificFields(
+      movieStartTime,
+      movieEndTime,
+      movieDate
     );
-    if (!buses) throw new Error('Cannot find buses for given fields');
+    if (!movies) throw new Error('Cannot find movies for given fields');
     res.status(200).json({
-      message: 'Buses fetched successfully',
+      message: 'Movies fetched successfully',
       success: true,
-      buses: buses,
+      movies: movies,
     });
   } catch (error) {
     error.statusCode = 500;
-    error.message = error.message || 'Fetching buses by fields failed';
+    error.message = error.message || 'Fetching movies by fields failed';
     return next(error);
   }
 };
 
 exports.getBookedSeats = async (req, res, next) => {
   try {
-    const busId = req.params.busId;
-    const bus = await busUtils.findBusById(busId);
-    if (!bus) {
-      throw new Error('Some db error');
-    }
+    const movieId = req.params.movieId;
+    const movie = await movieUtils.findMovieById(movieId);
+    if (!movie) throw new Error('Could not find movie by ID');
 
     res.status(200).json({
       message: 'Seats fetched successfully',
       success: true,
-      bookedSeats: bus.bookedSeats,
+      bookedSeats: movie.bookedSeats,
     });
   } catch (error) {
     error.statusCode = 500;

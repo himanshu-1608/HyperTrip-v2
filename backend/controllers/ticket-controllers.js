@@ -3,22 +3,22 @@ const movieUtils = require('../utils/db-utils/movie-utils');
 
 exports.postBookTicket = async (req, res, next) => {
   try {
-    const busInfo = req.body.busId;
+    const movieInfo = req.body.movieId;
     const bookedBy = req.userId;
     const selectedSeats = [...req.body.selectedSeats];
     const tickets = selectedSeats.map((seat) => {
       return {
-        busInfo: busInfo,
-        bookedBy: bookedBy,
         number: seat,
+        bookedBy: bookedBy,
+        movieInfo: movieInfo,
       };
     });
     const createdTickets = await ticketUtils.createMany(tickets);
     if (!createdTickets) throw new Error('Error while creating tickets');
-    const bus = await busUtils.findBusById(req.body.busId);
-    const updatedBookedSeats = [...bus.bookedSeats, ...createdTickets];
-    bus.bookedSeats = updatedBookedSeats;
-    await busUtils.saveBus(bus);
+    const movie = await movieUtils.findMovieById(req.body.movieId);
+    const updatedBookedSeats = [...movie.bookedSeats, ...createdTickets];
+    movie.bookedSeats = updatedBookedSeats;
+    await movieUtils.saveMovie(movie);
 
     res.status(201).json({
       message: 'Tickets booked successfully',
@@ -27,15 +27,6 @@ exports.postBookTicket = async (req, res, next) => {
   } catch (error) {
     error.statusCode = 500;
     error.message = error.message || 'Booking ticket failed!';
-    return next(error);
-  }
-};
-
-exports.getOwnerOfTicket = async (req, res, next) => {
-  try {
-  } catch (error) {
-    error.statusCode = 500;
-    error.message = error.message || 'Could not find owner of ticket!';
     return next(error);
   }
 };
