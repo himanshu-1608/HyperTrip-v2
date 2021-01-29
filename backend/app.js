@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/auth-routes');
-const busRoutes = require('./routes/bus-routes');
+const movieRoutes = require('./routes/movie-routes');
 const ticketRoutes = require('./routes/ticket-routes');
 const adminRoutes = require('./routes/admin-routes');
 const { MONGODB_URI } = require('./config');
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/auth', authRoutes);
-app.use('/bus', busRoutes);
+app.use('/movie', movieRoutes);
 app.use('/ticket', ticketRoutes);
 app.use('/admin', adminRoutes);
 

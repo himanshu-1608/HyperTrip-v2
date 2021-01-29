@@ -1,5 +1,5 @@
-const userUtils = require('../utils/db-utils/user');
-const busUtils = require('../utils/db-utils/bus');
+const userUtils = require('../utils/db-utils/user-utils');
+const movieUtils = require('../utils/db-utils/movie-utils');
 
 exports.getAllBuses = async (req, res, next) => {
   try {

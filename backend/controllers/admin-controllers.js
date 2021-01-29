@@ -1,5 +1,5 @@
-const busUtils = require('../utils/db-utils/bus');
-const ticketUtils = require('../utils/db-utils/ticket');
+const movieUtils = require('../utils/db-utils/movie-utils');
+const ticketUtils = require('../utils/db-utils/ticket-utils');
 
 exports.postAddBus = async (req, res, next) => {
   let createdBy, busDetails, createdBus;
@@ -43,7 +43,7 @@ exports.postAddBus = async (req, res, next) => {
 exports.getBuses = async (req, res, next) => {
   try {
     const adminId = req.userId;
-    const buses = await busUtils.findAdminBuses(adminId);
+    const buses = await movieUtils.findMoviesCreatedByAdmin(adminId);
     res.status(200).json({
       message: 'Buses fetched successfullly.',
       success: true,

@@ -1,7 +1,7 @@
 {
   "name": "hypertrip",
   "version": "1.0.0",
-  "description": "Bus-ticket-booking app backend",
+  "description": "Movie-ticket-booking app backend",
   "main": "app.js",
   "scripts": {
     "test": "mocha --timeout 10000 --recursive --exit",

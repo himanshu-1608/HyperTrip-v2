@@ -1,5 +1,5 @@
-const ticketUtils = require('../utils/db-utils/ticket');
-const busUtils = require('../utils/db-utils/bus');
+const ticketUtils = require('../utils/db-utils/ticket-utils');
+const movieUtils = require('../utils/db-utils/movie-utils');
 
 exports.postBookTicket = async (req, res, next) => {
   try {
