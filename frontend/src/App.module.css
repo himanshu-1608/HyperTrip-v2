@@ -10,11 +10,10 @@
   background-color: #eee;
   text-align: right;
   margin-left: 280px;
-  margin-top: 8vh;
   width: 80%;
   position: relative;
   padding: 2rem;
-  min-height: 92vh;
+  min-height: 100vh;
   box-sizing: border-box;
   float: right;
   box-shadow: -15px -15px 15px -8px rgba(0, 0, 0, 0.5);

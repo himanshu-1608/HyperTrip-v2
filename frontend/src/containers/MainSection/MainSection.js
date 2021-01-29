@@ -21,12 +21,12 @@ class MainSection extends Component {
     onSearchSection: true,
     onViewAllSection: false,
     onAddBusSection: false,
-    allBuses: [],
-    previousPath: ''
+    allMovies: [],
+    previousPath: '',
   };
 
   componentDidMount() {
-    this.fetchAllBuses();
+    this.fetchAllMovies();
     this.renderProperComponent();
   }
 
@@ -42,11 +42,11 @@ class MainSection extends Component {
     if (this.props.location.data && this.props.location.data.bus) {
       const bus = this.props.location.data.bus;
       this.props.location.data = null;
-      const updatedAllBuses = [...this.state.allBuses];
+      const updatedAllBuses = [...this.state.allMovies];
       updatedAllBuses.push(bus);
       this.setState(
         {
-          allBuses: updatedAllBuses
+          allMovies: updatedAllBuses,
         },
         () => this.viewAllSectionActiveHandler()
       );
@@ -58,18 +58,18 @@ class MainSection extends Component {
     }
   }
 
-  fetchAllBuses = async () => {
+  fetchAllMovies = async () => {
     let path;
-    if (this.props.userInfo && this.props.userInfo.isAdmin)
-      path = '/admin/admin-buses?isAdmin=true';
-    else path = '/bus/buses';
+    path =
+      this.props.userInfo && this.props.userInfo.isAdmin
+        ? '/admin/admin-movies?isAdmin=true'
+        : '/movie/movies';
     const result = await fetcher(path, 'GET');
-    console.log(result); //remove later
     if (!(result && result.success)) {
-      console.log(result);
-      return this.props.history.push('/error');
+      this.props.history.push('/error');
+      return;
     }
-    this.setState({ allBuses: result.buses });
+    this.setState({ allMovies: result.movies });
   };
 
   searchSectionActiveHandler = () => {
@@ -80,7 +80,7 @@ class MainSection extends Component {
     this.setState({
       onSearchSection: true,
       onViewAllSection: false,
-      onAddBusSection: false
+      onAddBusSection: false,
     });
     this.props.history.push('/dashboard/search');
   };
@@ -93,7 +93,7 @@ class MainSection extends Component {
     this.setState({
       onSearchSection: false,
       onViewAllSection: true,
-      onAddBusSection: false
+      onAddBusSection: false,
     });
     this.props.history.push('/dashboard/view-all');
   };
@@ -106,7 +106,7 @@ class MainSection extends Component {
     this.setState({
       onSearchSection: false,
       onViewAllSection: false,
-      onAddBusSection: true
+      onAddBusSection: true,
     });
     this.props.history.push('/dashboard/add');
   };
@@ -114,23 +114,26 @@ class MainSection extends Component {
   redirectToBusDetails = (bus) => {
     this.props.history.push({
       pathname: '/bus-details/' + bus._id,
-      data: bus
+      data: bus,
     });
   };
 
   render() {
     const searchSection = this.state.onSearchSection ? <SearchForm /> : null;
 
-    const buses = this.state.allBuses.map((bus) => {
-      return (
-        <Bus
-          key={bus._id}
-          bus={bus}
-          clicked={() => this.redirectToBusDetails(bus)}
-          isAdmin={this.props.userInfo.isAdmin}
-        />
-      );
-    });
+    let buses;
+    if (this.state.allMovies) {
+      buses = this.state.allMovies.map((bus) => {
+        return (
+          <Bus
+            key={bus._id}
+            bus={bus}
+            clicked={() => this.redirectToBusDetails(bus)}
+            isAdmin={this.props.userInfo.isAdmin}
+          />
+        );
+      });
+    }
 
     const viewAllSection = this.state.onViewAllSection ? buses : null;
 
@@ -173,7 +176,7 @@ class MainSection extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
-    userInfo: state.auth.userDetails
+    userInfo: state.auth.userDetails,
   };
 };
 

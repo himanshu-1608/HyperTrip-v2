@@ -8,7 +8,6 @@ import Login from './containers/Login/Login';
 import Error from './components/Error/Error';
 import MainSection from './containers/MainSection/MainSection';
 import BusDetails from './containers/BusDetails/BusDetails';
-// import HomePage from './containers/HomePage/HomePage';
 
 import * as actionCreators from './actions/index';
 import classes from './App.module.css';
@@ -26,7 +25,6 @@ class App extends Component {
   logoutHandler = () => {
     this.props.setStatusToLogout();
     return this.props.history.push('/login');
-    // <Redirect to='/'/>
   };
 
   render() {
@@ -56,7 +54,7 @@ class App extends Component {
                 />
               ) : null}
               <Route exact path="/error" component={Error} />
-              <Route path="/" component={Login} />
+              <Route path="/" component={MainSection} />
             </Switch>
           </div>
         </div>
@@ -68,7 +66,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
-    userInfo: state.auth.userDetails
+    userInfo: state.auth.userDetails,
   };
 };
 
@@ -76,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setStatusToLogin: (userDetails, token) =>
       dispatch(actionCreators.setStatusToLogin(userDetails, token)),
-    setStatusToLogout: () => dispatch(actionCreators.setStatusToLogout())
+    setStatusToLogout: () => dispatch(actionCreators.setStatusToLogout()),
   };
 };
 
