@@ -10,20 +10,20 @@ module.exports = async (req, res, next) => {
     try {
       decodedToken = jwt.verify(token, SECRET);
     } catch (err) {
-      const error = new Error('Server Error.');
-      error.statusCode = 401;
+      const error = new Error('Server/Token Error.');
+      error.statusCode = 500;
       return next(error);
     }
     if (!decodedToken) {
-      const error = new Error('User is not authenticated.');
+      const error = new Error('Unauthenticated User(Please Login OR Signup)');
       error.statusCode = 401;
       return next(error);
     }
     req.userId = decodedToken.userId;
     next();
   } else {
-    const error = new Error('User is not authenticated.');
+    const error = new Error('No Auth Token sent');
     error.statusCode = 401;
-    next(error);
+    return next(error);
   }
 };

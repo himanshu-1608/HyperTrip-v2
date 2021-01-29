@@ -1,5 +1,4 @@
 const busUtils = require('../utils/db-utils/bus');
-const userUtils = require('../utils/db-utils/user');
 const ticketUtils = require('../utils/db-utils/ticket');
 
 exports.postAddBus = async (req, res, next) => {

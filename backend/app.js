@@ -6,7 +6,6 @@ const authRoutes = require('./routes/auth-routes');
 const busRoutes = require('./routes/bus-routes');
 const ticketRoutes = require('./routes/ticket-routes');
 const adminRoutes = require('./routes/admin-routes');
-
 const { MONGODB_URI } = require('./config');
 
 const app = express();
@@ -29,7 +28,6 @@ app.use('/ticket', ticketRoutes);
 app.use('/admin', adminRoutes);
 
 app.use((error, req, res, next) => {
-  console.log('Error occured', error);
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
