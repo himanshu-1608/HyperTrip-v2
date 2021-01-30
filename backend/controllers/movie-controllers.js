@@ -18,13 +18,9 @@ exports.getAllMovies = async (req, res, next) => {
 
 exports.getSearchedMovies = async (req, res, next) => {
   try {
-    const { movieStartTime, movieEndTime, movieDate } = req.body;
-    const movies = await movieUtils.findMovieBySpecificFields(
-      movieStartTime,
-      movieEndTime,
-      movieDate
-    );
-    if (!movies) throw new Error('Cannot find movies for given fields');
+    const { name, movieDate } = req.body;
+    const movies = await movieUtils.findMovieBySpecificFields(name, movieDate);
+    if (!movies) throw new Error('Could not find Movies');
     res.status(200).json({
       message: 'Movies fetched successfully',
       success: true,

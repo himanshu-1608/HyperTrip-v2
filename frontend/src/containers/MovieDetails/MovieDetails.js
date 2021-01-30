@@ -75,7 +75,6 @@ class MovieDetails extends Component {
       'POST',
       JSON.stringify(body)
     );
-    console.log('buytickethandler result: ', result); // remove later
     if (!result.success) {
       return this.props.history.push('/error');
     }
@@ -91,7 +90,6 @@ class MovieDetails extends Component {
         isAdmin: this.props.userInfo.isAdmin,
       })
     );
-    console.log('resetMovie result: ', result); // remove later
     if (!result.success) {
       return this.props.history.push('/error');
     }
@@ -126,7 +124,7 @@ class MovieDetails extends Component {
 
     return (
       <div className={classes.RootContainer}>
-        <div className={classes.BusInfoContainer}>
+        <div className={classes.MovieInfoContainer}>
           <h1>Select Seats</h1>
           <div className={classes.StatusContainer}>
             <div>

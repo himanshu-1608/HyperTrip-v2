@@ -42,15 +42,13 @@ const fetcher = async (path, method, body = null, isFormData = false) => {
 
   try {
     result = await fetch(BASE_URL + path, payload);
-
     finalResult = await result.json();
     if (!(result.status === 200 || result.status === 201)) {
       throw new Error('Result status not OK in fetcher');
     }
     return finalResult;
   } catch (error) {
-    console.log('Error is', error);
-    return finalResult;
+    console.log('Error in fetchWrapper: ', error);
   }
 };
 

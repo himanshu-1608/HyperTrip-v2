@@ -60,7 +60,6 @@ class AddMovieForm extends Component {
       'POST',
       JSON.stringify(body)
     );
-    console.log('formSubmit result addmovie:', result); // remove later
     if (!result.success) {
       this.props.history.push('/error');
     } else {

@@ -28,50 +28,17 @@ exports.findAllMovies = async () => {
   }
 };
 
-exports.findMovieBySpecificFields = async (
-  movieStartTime,
-  movieEndTime,
-  movieDate
-) => {
+exports.findMovieBySpecificFields = async (name, movieDate) => {
   try {
     let movies;
-    if (
-      movieStartTime.trim() !== '' &&
-      movieEndTime.trim() !== '' &&
-      movieDate.trim() !== ''
-    ) {
-      movies = await Movie.find({
-        movieStartTime: movieStartTime,
-        movieEndTime: movieEndTime,
-        movieDate: movieDate,
-      }).limit(20);
-    } else if (movieStartTime.trim() !== '' && movieEndTime.trim() !== '') {
-      movies = await Movie.find({
-        movieStartTime: movieStartTime,
-        movieEndTime: movieEndTime,
-      }).limit(20);
-    } else if (movieStartTime.trim() !== '' && movieDate.trim() !== '') {
-      movies = await Movie.find({
-        movieStartTime: movieStartTime,
-        movieDate: movieDate,
-      }).limit(20);
-    } else if (movieEndTime.trim() !== '' && movieDate.trim() !== '') {
-      movies = await Movie.find({
-        movieEndTime: movieEndTime,
-        movieDate: movieDate,
-      }).limit(20);
-    } else if (movieStartTime.trim() !== '') {
-      movies = await Movie.find({
-        movieStartTime: movieStartTime,
-      }).limit(20);
-    } else if (movieEndTime.trim() !== '') {
-      movies = await Movie.find({
-        movieEndTime: movieEndTime,
-      }).limit(20);
+    if (name.trim() !== '' && movieDate.trim() !== '') {
+      movies = await Movie.find({ name: name, movieDate: movieDate }).limit(20);
+    } else if (name.trim() !== '') {
+      movies = await Movie.find({ name: name }).limit(20);
     } else if (movieDate.trim() !== '') {
-      movies = await Movie.find({
-        movieDate: movieDate,
-      }).limit(20);
+      movies = await Movie.find({ movieDate: movieDate }).limit(20);
+    } else {
+      movies = await Movie.find().limit(20);
     }
     return movies;
   } catch (error) {

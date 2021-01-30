@@ -6,7 +6,7 @@
   display: flex;
 }
 
-.BusInfoContainer {
+.MovieInfoContainer {
   background-color: #ffffff;
   padding: 2rem;
   min-width: 55%;
@@ -106,7 +106,7 @@
   cursor: pointer;
 }
 
-.BusInfoContainer > button {
+.MovieInfoContainer > button {
   width: 50%;
 }
 
@@ -183,7 +183,7 @@
   font-size: 40px;
 }
 
-.BusInfoContainer > button,
+.MovieInfoContainer > button,
 .PersonDetailsContainer > button,
 .TicketBookerInfoContainer > button {
   padding: 1rem;
@@ -196,7 +196,7 @@
   font-size: 16px;
 }
 
-.BusInfoContainer > button:hover,
+.MovieInfoContainer > button:hover,
 .PersonDetailsContainer > button:hover,
 .TicketBookerInfoContainer > button:hover {
   color: #ef5350;

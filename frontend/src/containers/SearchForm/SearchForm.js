@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { BsCursor } from 'react-icons/bs';
-import { GoLocation } from 'react-icons/go';
-import { MdDateRange } from 'react-icons/md';
+import { MdDateRange, MdTheaters } from 'react-icons/md';
 
 import Movie from '../../components/Movie/Movie';
 import fetcher from '../../fetchWrapper';
@@ -11,9 +9,8 @@ import classes from './SearchForm.module.css';
 
 class SearchForm extends Component {
   state = {
-    startCity: '',
-    endCity: '',
-    journeyDate: '',
+    name: '',
+    movieDate: '',
     searchResults: [],
     errorMessage: '',
     isSearched: false,
@@ -25,31 +22,17 @@ class SearchForm extends Component {
     });
   };
 
-  isFromValid = () => {
-    const { startCity, endCity, journeyDate } = this.state;
-    return (
-      startCity.trim().length ||
-      endCity.trim().length ||
-      journeyDate.trim().length
-    );
-  };
-
-  fromSubmitHandler = async () => {
-    if (!this.isFromValid()) {
-      return;
-    }
-    const { startCity, endCity, journeyDate } = this.state;
+  formSubmitHandler = async () => {
+    const { name, movieDate } = this.state;
     const body = JSON.stringify({
-      startCity: startCity,
-      endCity: endCity,
-      journeyDate: journeyDate,
+      name: name,
+      movieDate: movieDate,
     });
-    const result = await fetcher('/bus/search-bus', 'POST', body);
-    console.log(result); // remove later
+    const result = await fetcher('/movie/search-movie', 'POST', body);
     if (!result.success) {
       this.props.history.push('/error');
     }
-    this.setState({ searchResults: result.buses, isSearched: true });
+    this.setState({ searchResults: result.movies, isSearched: true });
   };
 
   redirectToMovieDetails = (movie) => {
@@ -62,12 +45,12 @@ class SearchForm extends Component {
   render() {
     let searchResults = null;
     if (this.state.isSearched) {
-      const searchedBuses = this.state.searchResults.map((bus) => {
+      const searchedMovies = this.state.searchResults.map((movie) => {
         return (
           <Movie
-            key={bus._id}
-            bus={bus}
-            clicked={() => this.redirectToMovieDetails(bus)}
+            key={movie._id}
+            movie={movie}
+            clicked={() => this.redirectToMovieDetails(movie)}
             isAdmin={this.props.userInfo.isAdmin}
           />
         );
@@ -79,7 +62,7 @@ class SearchForm extends Component {
             Search results
             <hr />
           </header>
-          <div>{searchedBuses}</div>
+          <div>{searchedMovies}</div>
         </div>
       );
     }
@@ -88,22 +71,12 @@ class SearchForm extends Component {
       <div className={classes.RootContainer}>
         <div className={classes.FormContainer}>
           <div className={classes.InputContainer}>
-            <BsCursor size={20} />
+            <MdTheaters size={20} />
             <input
               type="text"
-              name="startCity"
-              placeholder="Start City"
-              value={this.state.startCity}
-              onChange={this.inputChangeHandler}
-            />
-          </div>
-          <div className={classes.InputContainer}>
-            <GoLocation size={20} />
-            <input
-              type="text"
-              name="endCity"
-              placeholder="End City"
-              value={this.state.endCity}
+              name="name"
+              placeholder="Movie Name"
+              value={this.state.name}
               onChange={this.inputChangeHandler}
             />
           </div>
@@ -111,14 +84,14 @@ class SearchForm extends Component {
             <MdDateRange size={20} />
             <input
               type="Date"
-              name="journeyDate"
+              name="movieDate"
               placeholder="Date"
-              value={this.state.journeyDate}
+              value={this.state.movieDate}
               onChange={this.inputChangeHandler}
               style={{ color: 'grey', outline: 'none' }}
             />
           </div>
-          <button onClick={this.fromSubmitHandler}>Search</button>
+          <button onClick={this.formSubmitHandler}>Search</button>
         </div>
         {searchResults}
       </div>

@@ -15,10 +15,10 @@ class Signup extends Component {
       gender: '',
       password: '',
       confirmPassword: '',
-      isAdmin: false
+      isAdmin: false,
     },
     isLoading: false,
-    error: ''
+    error: '',
   };
 
   componentDidMount() {
@@ -107,7 +107,6 @@ class Signup extends Component {
           'POST',
           JSON.stringify(this.state.userInfo)
         );
-        console.log(result);
         if (!result.success) {
           this.setState({ error: result.data[0].msg, isLoading: false });
         } else {
@@ -116,7 +115,6 @@ class Signup extends Component {
         }
       } catch (err) {
         this.setState({ isLoading: false });
-        console.log('Error in signup frontend ', err);
         this.props.history.push('/error');
       }
     }
@@ -268,7 +266,7 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
   };
 };
 
