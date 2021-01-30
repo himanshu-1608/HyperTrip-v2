@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  withRouter,
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Navbar from './components/Navbar/Navbar';
@@ -29,7 +35,6 @@ class App extends Component {
 
   render() {
     const isAuth = this.props.isAuth;
-    console.log('isAuth changes: ', isAuth);
     return (
       <BrowserRouter>
         <div className={classes.RootContainer}>
@@ -55,7 +60,7 @@ class App extends Component {
                 />
               ) : null}
               <Route exact path="/error" component={Error} />
-              <Route path="/" component={MainSection} />
+              <Redirect to="/login" />
             </Switch>
           </div>
         </div>

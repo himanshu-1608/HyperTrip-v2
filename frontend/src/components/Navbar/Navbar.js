@@ -59,7 +59,7 @@ class Navigation extends Component {
       <div className={classes.RootContainer}>
         <div className={classes.IconContainer}>
           <img src={Logo} alt="Logo" />
-          <span> HyperTrip </span>
+          <span> HyperWatch </span>
         </div>
         <ul>
           {!this.props.isAuth ? (
@@ -84,7 +84,7 @@ class Navigation extends Component {
             <li>
               <BsSearch style={{ marginRight: '10px' }} />
               <NavLink to="/dashboard/search" id="navSearch">
-                Search Bus
+                Search Movie
               </NavLink>
             </li>
           ) : null}

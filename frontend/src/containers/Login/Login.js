@@ -18,9 +18,8 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.userDetails);
     if (this.props.isAuth) {
-      this.props.history.push('/');
+      this.props.history.push('/dashboard');
     }
   }
 
@@ -54,13 +53,11 @@ class Login extends Component {
           'POST',
           JSON.stringify(this.state.userInfo)
         );
-        console.log(result);
         if (!result.success) {
           if (result.data)
             this.setState({ error: result.data[0].msg, isLoading: false });
         } else {
           this.props.setStatusToLogin(result.userDetails, result.token);
-          console.log('Login result', result);
           this.props.history.push('/dashboard');
         }
       } catch (err) {
@@ -72,7 +69,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log('Login bhi chala');
     let error = null;
     if (this.state.error !== '') {
       error = <p style={{ color: 'red' }}>{this.state.error}</p>;

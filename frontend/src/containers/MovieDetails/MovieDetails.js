@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { FaBity } from 'react-icons/fa';
 import { connect } from 'react-redux';
 
 import fetcher from '../../fetchWrapper';
@@ -26,7 +25,6 @@ class MovieDetails extends Component {
   getMovieDetails = async () => {
     const movieId = this.state.movieId;
     const result = await fetcher(`/movie/booked-seats/${movieId}`, 'GET');
-    console.log('getMovieDetails: ', result); // remove later
     if (!result.success) {
       return this.props.history.push('/error');
     }
@@ -43,7 +41,7 @@ class MovieDetails extends Component {
     if (this.props.userInfo && this.props.userInfo.isAdmin) {
       if (event.target.className.includes('Grey')) {
         this.state.bookedSeats.forEach((seat) => {
-          if (seat.number === id) {
+          if (parseInt(seat.number) === parseInt(id)) {
             this.setState({ bookedBy: { ...seat.bookedBy }, isBooked: true });
           }
         });
@@ -55,17 +53,13 @@ class MovieDetails extends Component {
         event.target.className = classes.Blue;
         const updatedSelectedSeats = [...this.state.selectedSeats];
         updatedSelectedSeats.push(event.target.id);
-        this.setState({ selectedSeats: updatedSelectedSeats }, () =>
-          console.log('updated state on seatclickhandler', this.state)
-        );
+        this.setState({ selectedSeats: updatedSelectedSeats });
       } else if (event.target.className.includes('Blue')) {
         event.target.className = classes.Indigo;
         const updatedSelectedSeats = [...this.state.selectedSeats];
         const index = updatedSelectedSeats.indexOf(event.target.id);
         updatedSelectedSeats.splice(index, 1);
-        this.setState({ selectedSeats: updatedSelectedSeats }, () =>
-          console.log('updated state on seatclickhandler', this.state)
-        );
+        this.setState({ selectedSeats: updatedSelectedSeats });
       }
     }
   };

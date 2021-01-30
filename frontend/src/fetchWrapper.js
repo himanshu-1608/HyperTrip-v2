@@ -44,7 +44,6 @@ const fetcher = async (path, method, body = null, isFormData = false) => {
     result = await fetch(BASE_URL + path, payload);
 
     finalResult = await result.json();
-    console.log('finalResult from fetcher: ', finalResult);
     if (!(result.status === 200 || result.status === 201)) {
       throw new Error('Result status not OK in fetcher');
     }
