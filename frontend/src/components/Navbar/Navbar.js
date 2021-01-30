@@ -104,7 +104,7 @@ class Navigation extends Component {
             <li>
               <BiPlus style={{ marginRight: '10px' }} />
               <NavLink to="/dashboard/add" id="navAdd">
-                Add Bus
+                Add Movie
               </NavLink>
             </li>
           ) : null}

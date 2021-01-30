@@ -85,11 +85,13 @@
   background-color: #ef5350;
   color: #ffffff;
   outline: none;
+  border: 2px solid #ef5350;
+  font-size: 16px;
+  box-shadow: 0px 0px 10px black;
 }
 
 .RootContainer > button:hover {
   color: #ef5350;
   background-color: #ffffff;
   border: 2px solid #ef5350;
-  font-size: 16px;
 }

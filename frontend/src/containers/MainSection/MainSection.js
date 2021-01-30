@@ -5,7 +5,7 @@ import { BiPlus } from 'react-icons/bi';
 
 import Movie from '../../components/Movie/Movie';
 import SearchForm from '../SearchForm/SearchForm';
-import AddBusForm from '../AddBusForm/AddBusForm';
+import AddMovieForm from '../AddMovieForm/AddMovieForm';
 import classes from './MainSection.module.css';
 import fetcher from '../../fetchWrapper';
 
@@ -20,7 +20,7 @@ class MainSection extends Component {
   state = {
     onSearchSection: true,
     onViewAllSection: false,
-    onAddBusSection: false,
+    onAddMovieSection: false,
     allMovies: [],
     previousPath: '',
   };
@@ -33,20 +33,20 @@ class MainSection extends Component {
   renderProperComponent = () => {
     const path = this.props.location.pathname;
     if (path.includes('search')) this.searchSectionActiveHandler();
-    else if (path.includes('add')) this.addBusSectionActiveHandler();
+    else if (path.includes('add')) this.addMovieSectionActiveHandler();
     else this.viewAllSectionActiveHandler();
     this.setState({ previousPath: path });
   };
 
   componentDidUpdate() {
-    if (this.props.location.data && this.props.location.data.bus) {
-      const bus = this.props.location.data.bus;
+    if (this.props.location.data && this.props.location.data.movie) {
+      const movie = this.props.location.data.movie;
       this.props.location.data = null;
-      const updatedAllBuses = [...this.state.allMovies];
-      updatedAllBuses.push(bus);
+      const updatedAllMovies = [...this.state.allMovies];
+      updatedAllMovies.push(movie);
       this.setState(
         {
-          allMovies: updatedAllBuses,
+          allMovies: updatedAllMovies,
         },
         () => this.viewAllSectionActiveHandler()
       );
@@ -80,7 +80,7 @@ class MainSection extends Component {
     this.setState({
       onSearchSection: true,
       onViewAllSection: false,
-      onAddBusSection: false,
+      onAddMovieSection: false,
     });
     this.props.history.push('/dashboard/search');
   };
@@ -93,12 +93,12 @@ class MainSection extends Component {
     this.setState({
       onSearchSection: false,
       onViewAllSection: true,
-      onAddBusSection: false,
+      onAddMovieSection: false,
     });
     this.props.history.push('/dashboard/view-all');
   };
 
-  addBusSectionActiveHandler = () => {
+  addMovieSectionActiveHandler = () => {
     const [searchElement, viewElement, addElement] = getElements();
     searchElement.className = '';
     viewElement.className = '';
@@ -106,7 +106,7 @@ class MainSection extends Component {
     this.setState({
       onSearchSection: false,
       onViewAllSection: false,
-      onAddBusSection: true,
+      onAddMovieSection: true,
     });
     this.props.history.push('/dashboard/add');
   };
@@ -135,8 +135,8 @@ class MainSection extends Component {
 
     const viewAllSection = this.state.onViewAllSection ? movies : null;
 
-    const addBusSection = this.state.onAddBusSection ? (
-      <AddBusForm
+    const addMovieSection = this.state.onAddMovieSection ? (
+      <AddMovieForm
         isAdmin={this.props.userInfo.isAdmin}
         viewAll={this.viewAllSectionActiveHandler}
       />
@@ -155,16 +155,16 @@ class MainSection extends Component {
           </div>
 
           {this.props.userInfo && this.props.userInfo.isAdmin ? (
-            <div onClick={this.addBusSectionActiveHandler} id="add">
+            <div onClick={this.addMovieSectionActiveHandler} id="add">
               <BiPlus size={24} />
-              <h2>Add Bus</h2>
+              <h2>Add Movie</h2>
             </div>
           ) : null}
         </header>
         <main>
           {searchSection}
           {viewAllSection}
-          {addBusSection}
+          {addMovieSection}
         </main>
       </div>
     );
