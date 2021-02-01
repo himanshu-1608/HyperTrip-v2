@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --timeout 10000 --recursive --exit",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test"
   },
-  "author": "Bharti",
+  "author": "Bharti+Himanshu",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
@@ -21,6 +22,7 @@
     "lodash": "^4.17.20",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "prettier": "^2.2.1",
     "uuid": "^8.3.2"
   },

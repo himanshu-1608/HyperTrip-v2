@@ -38,14 +38,23 @@ app.use((error, req, res, next) => {
   });
 });
 
-if (require.main === module) {
+const startServer = () => {
+  app.listen(8080);
+  console.log('Server Running!');
+};
+
+const connectMongoose = () => {
   mongoose
     .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-      app.listen(8080);
-      console.log('Connected!');
+      console.log('Mongoose Connected!');
+      startServer();
     })
     .catch((error) => console.log(error));
+};
+
+if (require.main === module) {
+  connectMongoose();
 }
 
 module.exports = app;
